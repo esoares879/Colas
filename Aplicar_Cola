@@ -1,0 +1,93 @@
+
+package Practica_Cola;
+
+import java.util.Scanner;
+
+public class Aplica_Cola {
+    static int posicion = 0;
+    static CCola COLA;
+    static Scanner teclado = new Scanner(System.in);
+    
+     public static void main(String[] args) {
+        menu();
+
+    }
+    static void creaCola() {
+        int tam;
+        System.out.print("Ingrese la cantidad de Trabajadores");
+        tam = teclado.nextInt();
+        COLA = new CCola(tam);
+    }
+    
+    static void ingresarDatos() {
+        double tarifa;
+        String codigo;
+        String nombre;
+        int hora;
+
+        System.out.print("Ingrese el codigo");
+        codigo = teclado.next();
+        System.out.print("Ingrese el nombre");
+        nombre = teclado.next();
+        do {
+            System.out.print("Ingrese tarifa por hora trabajada");
+            tarifa = teclado.nextDouble();
+            if (tarifa <= 0) {
+                System.out.print("ingrese tarifa valida");
+            }
+        } while (tarifa <= 0);
+
+        do {
+            System.out.print("Ingrese horas trabajadas al dia ");
+            hora = teclado.nextInt();
+            if (hora <= 0) {
+                System.out.print("Ingrese horas validas");
+            }
+        } while (hora <= 0);
+
+        COLA.InsertarCola(posicion, codigo, nombre, tarifa, hora);
+        posicion++;
+    }
+     
+     static void menu(){
+         int opc;
+         do{
+            System.out.print("\n============================ ");
+            System.out.print("MENU DE OPCIONES");
+            System.out.print("\n============================ ");
+            System.out.print("[1] CREAR COLA ");
+            System.out.print("============================ ");
+            System.out.print("[2] INGRESAR DATOS ");
+            System.out.print("[3] MOSTRAR DATOS");
+            System.out.print("[4] ELIMINAR DATOS ");
+            System.out.print("============================ ");
+            System.out.print("[0] SALIR ");
+            System.out.print("============================ ");
+            
+            System.out.print("Ingrese una alternativa ");
+            opc = teclado.nextInt();
+            System.out.println();
+            
+            switch(opc){
+                case 1:
+                    creaCola();
+                    break;
+                case 2:
+                    ingresarDatos();
+                    break;
+                case 3:
+                    COLA.MostrarCola();
+                    break;
+                case 4:
+                    COLA.EliminarCola();
+                    break;
+                case 0:
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.print("Ingrese una opcion correcta ");
+                    break;
+            }        
+         }while (true);
+     }
+}
